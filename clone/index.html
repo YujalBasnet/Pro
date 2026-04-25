@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Netflix-inspired responsive streaming homepage built with HTML, CSS, and JavaScript.">
+  <title>StreamFlix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="StreamFlix home">
+        <span class="brand__mark">S</span>
+        <span class="brand__text">StreamFlix</span>
+      </a>
+
+      <button class="topbar__menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="site-nav" class="nav" aria-label="Primary navigation">
+        <a class="nav__link is-active" href="#home">Home</a>
+        <a class="nav__link" href="#browse">Browse</a>
+        <a class="nav__link" href="#catalogue">TV Shows</a>
+        <a class="nav__link" href="#catalogue">Movies</a>
+        <a class="nav__link" href="#catalogue">New &amp; Popular</a>
+      </nav>
+
+      <div class="topbar__actions">
+        <label class="search" for="searchInput">
+          <span class="search__icon" aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="Search titles, genres, moods" autocomplete="off">
+        </label>
+        <button class="avatar" type="button" aria-label="Profile menu">
+          <span>JR</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero__copy">
+          <p class="eyebrow hero__eyebrow">Now Streaming</p>
+          <h1 id="heroTitle">Night Protocol</h1>
+          <p id="heroSummary" class="hero__summary"></p>
+          <div id="heroMeta" class="hero__meta"></div>
+          <div class="hero__buttons">
+            <button id="heroPlay" class="btn btn--primary" type="button">Play</button>
+            <button id="heroList" class="btn btn--ghost" type="button">My List</button>
+          </div>
+          <div id="heroStats" class="hero__stats"></div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__poster" id="heroPoster">
+            <div class="hero__poster-sheen"></div>
+            <div class="hero__poster-copy">
+              <p id="heroKicker" class="hero__poster-kicker"></p>
+              <h2 id="heroPosterTitle" class="hero__poster-title"></h2>
+              <p id="heroPosterTag" class="hero__poster-tag"></p>
+            </div>
+            <div class="hero__poster-footer">
+              <span class="hero__poster-badge">Featured pick</span>
+              <span class="hero__poster-badge hero__poster-badge--soft">Built to feel like a streaming home page</span>
+            </div>
+          </div>
+
+          <div class="spotlight">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Next up</p>
+                <h2>Handpicked for tonight</h2>
+              </div>
+            </div>
+            <div id="heroSpotlight" class="spotlight__list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="browse" class="browsebar">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Filter quickly</p>
+            <h2>Browse by mood</h2>
+          </div>
+          <p class="browsebar__hint">Search and genre filters keep the layout responsive on every screen size.</p>
+        </div>
+        <div id="genreFilters" class="chips" role="toolbar" aria-label="Genre filters"></div>
+      </section>
+
+      <section id="catalogue" class="catalogue" aria-live="polite">
+        <div class="catalogue__head">
+          <div>
+            <p class="eyebrow">Curated rails</p>
+            <h2>Popular right now</h2>
+          </div>
+          <p id="resultsCount" class="catalogue__count"></p>
+        </div>
+        <div id="railList" class="rails"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__brand">StreamFlix</p>
+      <p class="footer__copy">A Netflix-inspired front end built with responsive HTML, CSS, and JavaScript.</p>
+      <div class="footer__links">
+        <a href="#home">Home</a>
+        <a href="#browse">Browse</a>
+        <a href="#catalogue">Library</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
