@@ -14,7 +14,7 @@
   <div class="page-shell">
     <header class="topbar">
       <a class="brand" href="#home" aria-label="StreamFlix home">
-        <span class="brand__mark">S</span>
+        <span class="brand__mark">N</span>
         <span class="brand__text">StreamFlix</span>
       </a>
 
@@ -35,7 +35,7 @@
       <div class="topbar__actions">
         <label class="search" for="searchInput">
           <span class="search__icon" aria-hidden="true">⌕</span>
-          <input id="searchInput" type="search" placeholder="Search titles, genres, moods" autocomplete="off">
+          <input id="searchInput" type="search" placeholder="Titles, people, genres" autocomplete="off">
         </label>
         <button class="avatar" type="button" aria-label="Profile menu">
           <span>JR</span>
@@ -51,7 +51,7 @@
           <p id="heroSummary" class="hero__summary"></p>
           <div id="heroMeta" class="hero__meta"></div>
           <div class="hero__buttons">
-            <button id="heroPlay" class="btn btn--primary" type="button">Play</button>
+            <button id="heroPlay" class="btn btn--primary" type="button">Play Trailer</button>
             <button id="heroList" class="btn btn--ghost" type="button">My List</button>
           </div>
           <div id="heroStats" class="hero__stats"></div>
@@ -59,6 +59,7 @@
 
         <div class="hero__visual">
           <div class="hero__poster" id="heroPoster">
+            <img id="heroPosterImage" class="hero__poster-image" src="" alt="Featured title poster" loading="eager" decoding="async">
             <div class="hero__poster-sheen"></div>
             <div class="hero__poster-copy">
               <p id="heroKicker" class="hero__poster-kicker"></p>
@@ -67,7 +68,7 @@
             </div>
             <div class="hero__poster-footer">
               <span class="hero__poster-badge">Featured pick</span>
-              <span class="hero__poster-badge hero__poster-badge--soft">Built to feel like a streaming home page</span>
+              <span class="hero__poster-badge hero__poster-badge--soft">Because you watched future thrillers</span>
             </div>
           </div>
 
@@ -89,7 +90,7 @@
             <p class="eyebrow">Filter quickly</p>
             <h2>Browse by mood</h2>
           </div>
-          <p class="browsebar__hint">Search and genre filters keep the layout responsive on every screen size.</p>
+          <p class="browsebar__hint">Find your next watch by genre, tone, or what is trending tonight.</p>
         </div>
         <div id="genreFilters" class="chips" role="toolbar" aria-label="Genre filters"></div>
       </section>
@@ -115,6 +116,25 @@
         <a href="#catalogue">Library</a>
       </div>
     </footer>
+  </div>
+
+  <div id="trailerModal" class="trailer-modal" role="dialog" aria-modal="true" aria-labelledby="trailerTitle" aria-hidden="true" hidden>
+    <div id="trailerDialog" class="trailer-modal__dialog">
+      <div class="trailer-modal__head">
+        <h3 id="trailerTitle" class="trailer-modal__title">Trailer</h3>
+        <button id="trailerClose" class="trailer-modal__close" type="button" aria-label="Close trailer">Close</button>
+      </div>
+      <div class="trailer-modal__player">
+        <iframe
+          id="trailerFrame"
+          src=""
+          title="Movie trailer"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </div>
   </div>
 
   <script src="app.js" defer></script>

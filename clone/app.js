@@ -275,6 +275,12 @@ const movies = [
   }
 ];
 
+movies.forEach(movie => {
+  movie.poster = `https://picsum.photos/seed/${movie.id}-poster/600/900`;
+  movie.backdrop = `https://picsum.photos/seed/${movie.id}-backdrop/1280/720`;
+  movie.trailerQuery = `${movie.title} official trailer`;
+});
+
 const railDefinitions = [
   {
     title: 'All Matches',
@@ -345,17 +351,24 @@ const elements = {
   genreFilters: document.getElementById('genreFilters'),
   railList: document.getElementById('railList'),
   resultsCount: document.getElementById('resultsCount'),
+  heroSection: document.querySelector('.hero'),
   heroTitle: document.getElementById('heroTitle'),
   heroSummary: document.getElementById('heroSummary'),
   heroMeta: document.getElementById('heroMeta'),
   heroStats: document.getElementById('heroStats'),
   heroPoster: document.getElementById('heroPoster'),
+  heroPosterImage: document.getElementById('heroPosterImage'),
   heroKicker: document.getElementById('heroKicker'),
   heroPosterTitle: document.getElementById('heroPosterTitle'),
   heroPosterTag: document.getElementById('heroPosterTag'),
   heroPlay: document.getElementById('heroPlay'),
   heroList: document.getElementById('heroList'),
-  heroSpotlight: document.getElementById('heroSpotlight')
+  heroSpotlight: document.getElementById('heroSpotlight'),
+  trailerModal: document.getElementById('trailerModal'),
+  trailerDialog: document.getElementById('trailerDialog'),
+  trailerFrame: document.getElementById('trailerFrame'),
+  trailerTitle: document.getElementById('trailerTitle'),
+  trailerClose: document.getElementById('trailerClose')
 };
 
 const STORAGE_KEY = 'streamflix.my-list';
@@ -367,8 +380,6 @@ const state = {
   heroId: defaultHero.id,
   myList: new Set(readSavedList())
 };
-
-document.title = 'StreamFlix | Netflix Clone';
 
 elements.searchInput.value = '';
 
@@ -414,6 +425,10 @@ function compareMovies(a, b) {
 }
 
 function setPalette(element, colors, prefix) {
+  if (!element || !Array.isArray(colors) || colors.length === 0) {
+    return;
+  }
+
   const [first, second, third] = colors;
   element.style.setProperty(`--${prefix}-a`, first);
   element.style.setProperty(`--${prefix}-b`, second);
@@ -453,10 +468,57 @@ function getHeroMovie() {
   return movieById.get(state.heroId) ?? defaultHero;
 }
 
-function setHero(movieId) {
+function setHero(movieId, options = {}) {
+  const { scrollToHero = true } = options;
+
   state.heroId = movieId;
   render();
-  document.getElementById('home').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  if (scrollToHero) {
+    document.getElementById('home').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function buildTrailerEmbedUrl(movie) {
+  if (!movie) {
+    return '';
+  }
+
+  if (movie.trailerUrl) {
+    return movie.trailerUrl;
+  }
+
+  const searchTerm = encodeURIComponent(movie.trailerQuery ?? `${movie.title} official trailer`);
+  return `https://www.youtube.com/embed?autoplay=1&rel=0&modestbranding=1&playsinline=1&listType=search&list=${searchTerm}`;
+}
+
+function isTrailerOpen() {
+  return Boolean(elements.trailerModal) && !elements.trailerModal.hidden;
+}
+
+function openTrailer(movieId) {
+  const movie = movieById.get(movieId);
+
+  if (!movie || !elements.trailerModal || !elements.trailerFrame || !elements.trailerTitle) {
+    return;
+  }
+
+  elements.trailerTitle.textContent = `${movie.title} - Trailer`;
+  elements.trailerFrame.src = buildTrailerEmbedUrl(movie);
+  elements.trailerModal.hidden = false;
+  elements.trailerModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('is-modal-open');
+}
+
+function closeTrailer() {
+  if (!elements.trailerModal || !elements.trailerFrame) {
+    return;
+  }
+
+  elements.trailerModal.hidden = true;
+  elements.trailerModal.setAttribute('aria-hidden', 'true');
+  elements.trailerFrame.src = '';
+  document.body.classList.remove('is-modal-open');
 }
 
 function toggleList(movieId) {
@@ -482,6 +544,10 @@ function setMenuOpen(isOpen) {
   elements.topbar.classList.toggle('is-open', isOpen);
   elements.menuButton.setAttribute('aria-expanded', String(isOpen));
   elements.menuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+}
+
+function syncTopbarScrollState() {
+  elements.topbar.classList.toggle('is-scrolled', window.scrollY > 18);
 }
 
 function renderGenres() {
@@ -519,6 +585,12 @@ function renderHero() {
   elements.heroPosterTitle.textContent = hero.title;
   elements.heroPosterTag.textContent = hero.tagline;
   setPalette(elements.heroPoster, hero.colors, 'hero');
+  setPalette(elements.heroSection, hero.colors, 'hero-bg');
+
+  if (elements.heroPosterImage) {
+    elements.heroPosterImage.src = hero.poster;
+    elements.heroPosterImage.alt = `${hero.title} poster`;
+  }
 
   elements.heroMeta.replaceChildren(...buildPills([hero.type, hero.year, hero.rating, hero.runtime]));
   elements.heroStats.replaceChildren(
@@ -563,12 +635,23 @@ function renderSpotlight() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'spotlight-card';
-    button.setAttribute('aria-label', `Open ${movie.title}`);
-    button.addEventListener('click', () => setHero(movie.id));
+    button.setAttribute('aria-label', `Play ${movie.title} trailer`);
+    button.addEventListener('click', () => {
+      setHero(movie.id, { scrollToHero: false });
+      openTrailer(movie.id);
+    });
 
     const art = document.createElement('span');
     art.className = 'spotlight-card__art';
     setPalette(art, movie.colors, 'card');
+
+    const poster = document.createElement('img');
+    poster.className = 'spotlight-card__image';
+    poster.src = movie.poster;
+    poster.alt = `${movie.title} poster`;
+    poster.loading = 'lazy';
+    poster.decoding = 'async';
+    art.appendChild(poster);
 
     const copy = document.createElement('span');
     copy.className = 'spotlight-card__copy';
@@ -592,17 +675,27 @@ function createTitleCard(movie) {
   const card = document.createElement('button');
   card.type = 'button';
   card.className = 'title-card';
-  card.setAttribute('aria-label', `Select ${movie.title}`);
+  card.setAttribute('aria-label', `Play ${movie.title} trailer`);
 
   if (movie.id === state.heroId) {
     card.classList.add('is-active');
   }
 
-  card.addEventListener('click', () => setHero(movie.id));
+  card.addEventListener('click', () => {
+    setHero(movie.id, { scrollToHero: false });
+    openTrailer(movie.id);
+  });
 
   const art = document.createElement('div');
   art.className = 'title-card__art';
   setPalette(art, movie.colors, 'card');
+
+  const poster = document.createElement('img');
+  poster.className = 'title-card__image';
+  poster.src = movie.poster;
+  poster.alt = `${movie.title} poster`;
+  poster.loading = 'lazy';
+  poster.decoding = 'async';
 
   const badge = document.createElement('span');
   badge.className = 'title-card__label';
@@ -612,7 +705,7 @@ function createTitleCard(movie) {
   saved.className = 'title-card__saved';
   saved.textContent = state.myList.has(movie.id) ? 'Saved' : `${movie.score}% Match`;
 
-  art.append(badge, saved);
+  art.append(poster, badge, saved);
 
   const body = document.createElement('div');
   body.className = 'title-card__body';
@@ -742,7 +835,22 @@ elements.searchInput.addEventListener('keydown', event => {
 });
 
 elements.heroPlay.addEventListener('click', () => {
-  document.getElementById('catalogue').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  openTrailer(getHeroMovie().id);
+});
+
+elements.heroPoster.setAttribute('role', 'button');
+elements.heroPoster.setAttribute('tabindex', '0');
+elements.heroPoster.setAttribute('aria-label', 'Play featured trailer');
+
+elements.heroPoster.addEventListener('click', () => {
+  openTrailer(getHeroMovie().id);
+});
+
+elements.heroPoster.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    openTrailer(getHeroMovie().id);
+  }
 });
 
 elements.heroList.addEventListener('click', () => {
@@ -755,6 +863,8 @@ elements.menuButton.addEventListener('click', () => {
 
 elements.navLinks.forEach(link => {
   link.addEventListener('click', () => {
+    elements.navLinks.forEach(navLink => navLink.classList.remove('is-active'));
+    link.classList.add('is-active');
     setMenuOpen(false);
   });
 });
@@ -765,10 +875,26 @@ window.addEventListener('resize', () => {
   }
 });
 
+window.addEventListener('scroll', syncTopbarScrollState, { passive: true });
+
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
+    if (isTrailerOpen()) {
+      closeTrailer();
+      return;
+    }
+
     setMenuOpen(false);
   }
 });
 
+elements.trailerClose.addEventListener('click', closeTrailer);
+
+elements.trailerModal.addEventListener('click', event => {
+  if (event.target === elements.trailerModal) {
+    closeTrailer();
+  }
+});
+
+syncTopbarScrollState();
 render();
