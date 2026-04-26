@@ -22,7 +22,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: var(--text);
   background:
     radial-gradient(1100px 560px at 70% 0%, rgba(229, 9, 20, 0.16), transparent 52%),
@@ -258,14 +258,17 @@ main {
   align-items: end;
   padding: clamp(92px, 11vw, 160px) clamp(18px, 2vw, 28px) 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
+  background-image:
     linear-gradient(90deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.84) 42%, rgba(0, 0, 0, 0.36) 100%),
+    var(--hero-image, none),
     linear-gradient(
       130deg,
       var(--hero-bg-a, #111111),
       var(--hero-bg-b, #242424) 56%,
       var(--hero-bg-c, #3a3a3a)
     );
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
 }
 
 .hero::before {
@@ -659,8 +662,48 @@ main {
   overflow-x: auto;
   overflow-y: visible;
   scroll-snap-type: x proximity;
-  padding: 4px 2px 20px;
+  scroll-padding-inline: 44px;
+  padding: 4px 44px 20px;
   scrollbar-color: rgba(255, 255, 255, 0.26) transparent;
+}
+
+.rail__track-wrap {
+  position: relative;
+}
+
+.rail__control {
+  position: absolute;
+  top: 4px;
+  bottom: 20px;
+  width: 38px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.35));
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.rail__control--prev {
+  left: 0;
+}
+
+.rail__control--next {
+  right: 0;
+}
+
+.rail__track-wrap:hover .rail__control,
+.rail__control:focus-visible {
+  opacity: 1;
+}
+
+.rail__control:hover,
+.rail__control:focus-visible {
+  background: rgba(229, 9, 20, 0.78);
 }
 
 .rail__track::-webkit-scrollbar {
@@ -683,7 +726,7 @@ main {
   cursor: pointer;
   scroll-snap-align: start;
   transform-origin: center bottom;
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .title-card:focus-visible,
@@ -758,18 +801,32 @@ main {
 }
 
 .title-card__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   display: grid;
-  gap: 6px;
-  padding: 8px 2px 2px;
-  opacity: 0.9;
-  transition: opacity 0.25s ease;
+  gap: 7px;
+  padding: 40px 10px 10px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9) 38%);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .title-card__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  color: #c9c9c9;
+  color: #d4d4d4;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.title-card__match {
+  color: #46d369;
+  font-weight: 700;
 }
 
 .title-card__title {
@@ -787,16 +844,29 @@ main {
 .genre-pill {
   display: inline-flex;
   align-items: center;
-  padding: 4px 7px;
+  padding: 3px 7px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
   color: #f0f0f0;
+  font-size: 0.64rem;
+}
+
+.title-card__play {
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .title-card:hover,
 .title-card:focus-visible {
-  transform: scale(1.1) translateY(-6px);
+  transform: scale(1.12) translateY(-8px);
   z-index: 5;
 }
 
@@ -808,6 +878,7 @@ main {
 .title-card:hover .title-card__body,
 .title-card:focus-visible .title-card__body {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .title-card.is-active .title-card__art {
@@ -1117,6 +1188,11 @@ main {
 
   .rail__track {
     grid-auto-columns: minmax(170px, 42vw);
+    padding-inline: 40px;
+  }
+
+  .rail__control {
+    width: 34px;
   }
 }
 
@@ -1171,6 +1247,11 @@ main {
 
   .rail__track {
     grid-auto-columns: minmax(160px, 66vw);
+    padding-inline: 34px;
+  }
+
+  .rail__control {
+    width: 30px;
   }
 
   .footer {
@@ -1215,6 +1296,10 @@ main {
 
   .spotlight-card__art {
     height: 60px;
+  }
+
+  .rail__control {
+    display: none;
   }
 }
 

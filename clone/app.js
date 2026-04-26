@@ -435,6 +435,14 @@ function setPalette(element, colors, prefix) {
   element.style.setProperty(`--${prefix}-c`, third ?? second);
 }
 
+function setImageVariable(element, variableName, imageUrl) {
+  if (!element || !imageUrl) {
+    return;
+  }
+
+  element.style.setProperty(variableName, `url("${imageUrl}")`);
+}
+
 function matchesFilters(movie) {
   const trimmedQuery = state.query.trim().toLowerCase();
   const matchesGenre = state.genre === 'All' || movie.genres.includes(state.genre);
@@ -586,6 +594,7 @@ function renderHero() {
   elements.heroPosterTag.textContent = hero.tagline;
   setPalette(elements.heroPoster, hero.colors, 'hero');
   setPalette(elements.heroSection, hero.colors, 'hero-bg');
+  setImageVariable(elements.heroSection, '--hero-image', hero.backdrop);
 
   if (elements.heroPosterImage) {
     elements.heroPosterImage.src = hero.poster;
@@ -705,14 +714,23 @@ function createTitleCard(movie) {
   saved.className = 'title-card__saved';
   saved.textContent = state.myList.has(movie.id) ? 'Saved' : `${movie.score}% Match`;
 
-  art.append(poster, badge, saved);
-
   const body = document.createElement('div');
   body.className = 'title-card__body';
 
   const meta = document.createElement('div');
   meta.className = 'title-card__meta';
-  meta.append(...buildPills([movie.type, movie.year, movie.runtime], 'pill'));
+
+  const match = document.createElement('span');
+  match.className = 'title-card__match';
+  match.textContent = `${movie.score}% Match`;
+
+  const year = document.createElement('span');
+  year.textContent = String(movie.year);
+
+  const rating = document.createElement('span');
+  rating.textContent = movie.rating;
+
+  meta.append(match, year, rating);
 
   const title = document.createElement('h3');
   title.className = 'title-card__title';
@@ -722,8 +740,13 @@ function createTitleCard(movie) {
   genres.className = 'title-card__genres';
   genres.append(...movie.genres.slice(0, 3).map(genre => createPill(genre, 'genre-pill')));
 
-  body.append(meta, title, genres);
-  card.append(art, body);
+  const playHint = document.createElement('span');
+  playHint.className = 'title-card__play';
+  playHint.textContent = 'Play trailer';
+
+  body.append(meta, title, genres, playHint);
+  art.append(poster, badge, saved, body);
+  card.append(art);
 
   return card;
 }
@@ -787,11 +810,38 @@ function renderRails(filteredMovies) {
     const track = document.createElement('div');
     track.className = 'rail__track';
 
+    const trackWrap = document.createElement('div');
+    trackWrap.className = 'rail__track-wrap';
+
+    const prevButton = document.createElement('button');
+    prevButton.type = 'button';
+    prevButton.className = 'rail__control rail__control--prev';
+    prevButton.setAttribute('aria-label', `Scroll ${rail.title} left`);
+    prevButton.textContent = '<';
+
+    const nextButton = document.createElement('button');
+    nextButton.type = 'button';
+    nextButton.className = 'rail__control rail__control--next';
+    nextButton.setAttribute('aria-label', `Scroll ${rail.title} right`);
+    nextButton.textContent = '>';
+
+    const scrollByAmount = () => Math.max(260, Math.round(track.clientWidth * 0.82));
+
+    prevButton.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollByAmount(), behavior: 'smooth' });
+    });
+
+    nextButton.addEventListener('click', () => {
+      track.scrollBy({ left: scrollByAmount(), behavior: 'smooth' });
+    });
+
     rail.items.slice(0, 10).forEach(movie => {
       track.appendChild(createTitleCard(movie));
     });
 
-    section.append(head, track);
+    trackWrap.append(prevButton, track, nextButton);
+
+    section.append(head, trackWrap);
     elements.railList.appendChild(section);
   });
 
