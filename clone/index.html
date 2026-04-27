@@ -3,137 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A Netflix-inspired responsive streaming homepage built with HTML, CSS, and JavaScript.">
-  <title>StreamFlix</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Netflix-style streaming homepage clone built with HTML, CSS, and JavaScript.">
+  <title>Netflix Clone</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="page-shell">
-    <header class="topbar">
-      <a class="brand" href="#home" aria-label="StreamFlix home">
-        <span class="brand__mark">N</span>
-        <span class="brand__text">StreamFlix</span>
-      </a>
+  <header id="siteHeader" class="header" aria-label="Global navigation">
+    <div class="header__left">
+      <a class="logo" href="#" aria-label="Netflix Home">NETFLIX</a>
 
-      <button class="topbar__menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <button
+        id="menuToggle"
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-controls="primaryNav"
+        aria-expanded="false"
+      >
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <nav id="site-nav" class="nav" aria-label="Primary navigation">
-        <a class="nav__link is-active" href="#home">Home</a>
-        <a class="nav__link" href="#browse">Browse</a>
-        <a class="nav__link" href="#catalogue">TV Shows</a>
-        <a class="nav__link" href="#catalogue">Movies</a>
-        <a class="nav__link" href="#catalogue">New &amp; Popular</a>
+      <nav id="primaryNav" class="nav" aria-label="Primary">
+        <a class="nav__link nav__link--active" href="#">Home</a>
+        <a class="nav__link" href="#">TV Shows</a>
+        <a class="nav__link" href="#">Movies</a>
+        <a class="nav__link" href="#">New &amp; Popular</a>
+        <a class="nav__link" href="#">My List</a>
+        <a class="nav__link" href="#">Browse by Languages</a>
       </nav>
+    </div>
 
-      <div class="topbar__actions">
-        <label class="search" for="searchInput">
-          <span class="search__icon" aria-hidden="true">⌕</span>
-          <input id="searchInput" type="search" placeholder="Titles, people, genres" autocomplete="off">
-        </label>
-        <button class="avatar" type="button" aria-label="Profile menu">
-          <span>JR</span>
-        </button>
-      </div>
-    </header>
+    <div class="header__right">
+      <button id="searchToggle" class="icon-btn" type="button" aria-label="Toggle search">Search</button>
+      <a class="kids-link" href="#">Kids</a>
+      <button class="icon-btn" type="button" aria-label="Notifications">Alerts</button>
+      <button class="profile" type="button" aria-label="Open profile menu">
+        <span class="profile__avatar">JR</span>
+        <span class="profile__caret" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
 
-    <main>
-      <section id="home" class="hero">
-        <div class="hero__copy">
-          <p class="eyebrow hero__eyebrow">Now Streaming</p>
-          <h1 id="heroTitle">Night Protocol</h1>
-          <p id="heroSummary" class="hero__summary"></p>
-          <div id="heroMeta" class="hero__meta"></div>
-          <div class="hero__buttons">
-            <button id="heroPlay" class="btn btn--primary" type="button">Play Trailer</button>
-            <button id="heroList" class="btn btn--ghost" type="button">My List</button>
-          </div>
-          <div id="heroStats" class="hero__stats"></div>
-        </div>
-
-        <div class="hero__visual">
-          <div class="hero__poster" id="heroPoster">
-            <img id="heroPosterImage" class="hero__poster-image" src="" alt="Featured title poster" loading="eager" decoding="async">
-            <div class="hero__poster-sheen"></div>
-            <div class="hero__poster-copy">
-              <p id="heroKicker" class="hero__poster-kicker"></p>
-              <h2 id="heroPosterTitle" class="hero__poster-title"></h2>
-              <p id="heroPosterTag" class="hero__poster-tag"></p>
-            </div>
-            <div class="hero__poster-footer">
-              <span class="hero__poster-badge">Featured pick</span>
-              <span class="hero__poster-badge hero__poster-badge--soft">Because you watched future thrillers</span>
-            </div>
-          </div>
-
-          <div class="spotlight">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">Next up</p>
-                <h2>Handpicked for tonight</h2>
-              </div>
-            </div>
-            <div id="heroSpotlight" class="spotlight__list"></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="browse" class="browsebar">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Filter quickly</p>
-            <h2>Browse by mood</h2>
-          </div>
-          <p class="browsebar__hint">Find your next watch by genre, tone, or what is trending tonight.</p>
-        </div>
-        <div id="genreFilters" class="chips" role="toolbar" aria-label="Genre filters"></div>
-      </section>
-
-      <section id="catalogue" class="catalogue" aria-live="polite">
-        <div class="catalogue__head">
-          <div>
-            <p class="eyebrow">Curated rails</p>
-            <h2>Popular right now</h2>
-          </div>
-          <p id="resultsCount" class="catalogue__count"></p>
-        </div>
-        <div id="railList" class="rails"></div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <p class="footer__brand">StreamFlix</p>
-      <p class="footer__copy">A Netflix-inspired front end built with responsive HTML, CSS, and JavaScript.</p>
-      <div class="footer__links">
-        <a href="#home">Home</a>
-        <a href="#browse">Browse</a>
-        <a href="#catalogue">Library</a>
-      </div>
-    </footer>
+  <div id="searchbar" class="searchbar" hidden>
+    <label for="searchInput" class="searchbar__label">Search titles</label>
+    <input
+      id="searchInput"
+      class="searchbar__input"
+      type="search"
+      placeholder="Titles, people, genres"
+      autocomplete="off"
+    >
   </div>
 
-  <div id="trailerModal" class="trailer-modal" role="dialog" aria-modal="true" aria-labelledby="trailerTitle" aria-hidden="true" hidden>
-    <div id="trailerDialog" class="trailer-modal__dialog">
-      <div class="trailer-modal__head">
-        <h3 id="trailerTitle" class="trailer-modal__title">Trailer</h3>
-        <button id="trailerClose" class="trailer-modal__close" type="button" aria-label="Close trailer">Close</button>
+  <main>
+    <section id="billboard" class="billboard" aria-label="Featured title">
+      <div class="billboard__veil" aria-hidden="true"></div>
+
+      <div class="billboard__content">
+        <p id="heroKicker" class="billboard__kicker">N SERIES</p>
+        <h1 id="heroTitle" class="billboard__title"></h1>
+        <p id="heroDescription" class="billboard__description"></p>
+
+        <div class="billboard__meta">
+          <span id="heroMatch" class="hero-match"></span>
+          <span id="heroYear"></span>
+          <span id="heroMaturity" class="hero-maturity"></span>
+          <span id="heroRuntime"></span>
+        </div>
+
+        <div class="billboard__actions">
+          <button id="playButton" class="btn btn--light" type="button">
+            <span class="btn__symbol" aria-hidden="true">&gt;</span>
+            <span>Play</span>
+          </button>
+
+          <button id="infoButton" class="btn btn--dark" type="button">
+            <span class="btn__symbol" aria-hidden="true">i</span>
+            <span>More Info</span>
+          </button>
+        </div>
       </div>
-      <div class="trailer-modal__player">
-        <iframe
-          id="trailerFrame"
-          src=""
-          title="Movie trailer"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
-      </div>
+
+      <div id="heroBadge" class="billboard__badge"></div>
+    </section>
+
+    <section id="rowsContainer" class="rows" aria-live="polite"></section>
+  </main>
+
+  <footer class="footer" aria-label="Footer">
+    <p class="footer__contact">Questions? Contact us.</p>
+    <div class="footer__links">
+      <a href="#">Audio Description</a>
+      <a href="#">Help Center</a>
+      <a href="#">Gift Cards</a>
+      <a href="#">Media Center</a>
+      <a href="#">Investor Relations</a>
+      <a href="#">Jobs</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy</a>
+      <a href="#">Legal Notices</a>
+      <a href="#">Cookie Preferences</a>
+      <a href="#">Corporate Information</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <button type="button" class="footer__service">Service Code</button>
+    <p class="footer__copyright">Netflix Clone UI</p>
+  </footer>
+
+  <div
+    id="infoModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-hidden="true"
+    hidden
+  >
+    <div class="modal__backdrop" data-close-modal="true"></div>
+
+    <div class="modal__dialog">
+      <button id="modalClose" class="modal__close" type="button" aria-label="Close details">Close</button>
+      <h2 id="modalTitle" class="modal__title"></h2>
+      <p id="modalMeta" class="modal__meta"></p>
+      <p id="modalDescription" class="modal__description"></p>
+      <a id="modalTrailer" class="modal__trailer" href="#" target="_blank" rel="noopener noreferrer">Watch trailer</a>
     </div>
   </div>
 
