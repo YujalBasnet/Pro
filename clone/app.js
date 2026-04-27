@@ -2,160 +2,238 @@ document.title = "Netflix Clone";
 
 const titles = [
   {
-    id: "night-protocol",
-    title: "Night Protocol",
+    id: "stranger-things",
+    title: "Stranger Things",
     kicker: "N SERIES",
     description:
-      "A systems analyst finds the city security feed predicting crimes hours before they happen, and now everyone wants the evidence gone.",
-    year: 2026,
-    maturity: "TV-MA",
-    runtime: "8 Episodes",
-    match: 98,
-    genres: ["Sci-Fi", "Thriller", "Mystery"],
-    tags: ["Trending", "Popular", "Only on Netflix"]
-  },
-  {
-    id: "velvet-city",
-    title: "Velvet City",
-    kicker: "N FILM",
-    description:
-      "A night courier gets trapped in a debt network where every favor is a crime and every turn has a witness.",
-    year: 2025,
-    maturity: "R",
-    runtime: "2h 06m",
-    match: 96,
-    genres: ["Crime", "Drama", "Thriller"],
-    tags: ["Trending", "Popular"]
-  },
-  {
-    id: "solar-hearts",
-    title: "Solar Hearts",
-    kicker: "N SERIES",
-    description:
-      "Two orbital engineers fall in love while rebuilding a drifting station near a zone no one is meant to map.",
-    year: 2026,
+      "In Hawkins, a missing boy, a secret lab, and a girl with impossible powers pull a small town into a deadly parallel world.",
+    year: 2016,
     maturity: "TV-14",
-    runtime: "10 Episodes",
-    match: 94,
-    genres: ["Romance", "Drama", "Sci-Fi"],
-    tags: ["New", "Only on Netflix"]
+    runtime: "4 Seasons",
+    match: 98,
+    genres: ["Sci-Fi", "Horror", "Drama"],
+    tags: ["Trending", "Popular", "Only on Netflix", "TV"]
   },
   {
-    id: "paper-thunder",
-    title: "Paper Thunder",
+    id: "wednesday",
+    title: "Wednesday",
+    kicker: "N SERIES",
+    description:
+      "At Nevermore Academy, Wednesday Addams investigates a supernatural murder spree while surviving teenage chaos her own way.",
+    year: 2022,
+    maturity: "TV-14",
+    runtime: "2 Seasons",
+    match: 96,
+    genres: ["Mystery", "Fantasy", "Comedy"],
+    tags: ["Trending", "Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "squid-game",
+    title: "Squid Game",
+    kicker: "N SERIES",
+    description:
+      "Hundreds of desperate players compete in deadly childhood games where the winner takes everything and losers leave for good.",
+    year: 2021,
+    maturity: "TV-MA",
+    runtime: "2 Seasons",
+    match: 94,
+    genres: ["Thriller", "Drama", "Mystery"],
+    tags: ["Trending", "Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "money-heist",
+    title: "Money Heist",
+    kicker: "N SERIES",
+    description:
+      "A mastermind known as The Professor recruits specialists for a heist that grows into a global resistance symbol.",
+    year: 2017,
+    maturity: "TV-MA",
+    runtime: "5 Parts",
+    match: 95,
+    genres: ["Crime", "Thriller", "Drama"],
+    tags: ["Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "bridgerton",
+    title: "Bridgerton",
+    kicker: "N SERIES",
+    description:
+      "Ambition, romance, and reputation collide in Regency London as the ton follows every whispered scandal.",
+    year: 2020,
+    maturity: "TV-MA",
+    runtime: "3 Seasons",
+    match: 93,
+    genres: ["Drama", "Romance"],
+    tags: ["Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "the-crown",
+    title: "The Crown",
+    kicker: "N SERIES",
+    description:
+      "The reign of Queen Elizabeth II unfolds through political conflict, private heartbreak, and public duty.",
+    year: 2016,
+    maturity: "TV-MA",
+    runtime: "6 Seasons",
+    match: 97,
+    genres: ["Drama", "History"],
+    tags: ["Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "black-mirror",
+    title: "Black Mirror",
+    kicker: "N SERIES",
+    description:
+      "A sharp anthology where modern technology bends human behavior into dark and often unsettling consequences.",
+    year: 2011,
+    maturity: "TV-MA",
+    runtime: "6 Seasons",
+    match: 95,
+    genres: ["Sci-Fi", "Thriller", "Drama"],
+    tags: ["Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "the-queens-gambit",
+    title: "The Queen's Gambit",
+    kicker: "N SERIES",
+    description:
+      "A chess prodigy fights addiction, pressure, and the elite of the chess world while redefining the game.",
+    year: 2020,
+    maturity: "TV-MA",
+    runtime: "Limited Series",
+    match: 93,
+    genres: ["Drama"],
+    tags: ["Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "ozark",
+    title: "Ozark",
+    kicker: "N SERIES",
+    description:
+      "A financial adviser moves his family to the Ozarks to launder money and quickly discovers survival has new rules.",
+    year: 2017,
+    maturity: "TV-MA",
+    runtime: "4 Seasons",
+    match: 97,
+    genres: ["Crime", "Thriller", "Drama"],
+    tags: ["Popular", "Only on Netflix", "TV"]
+  },
+  {
+    id: "three-body-problem",
+    title: "3 Body Problem",
+    kicker: "N SERIES",
+    description:
+      "Scientists around the world face a coordinated collapse of known physics as a cosmic countdown begins.",
+    year: 2024,
+    maturity: "TV-MA",
+    runtime: "Season 1",
+    match: 96,
+    genres: ["Sci-Fi", "Mystery", "Drama"],
+    tags: ["New", "Trending", "Only on Netflix", "TV"]
+  },
+  {
+    id: "red-notice",
+    title: "Red Notice",
     kicker: "N FILM",
     description:
-      "A parkour smuggler races across a floodlit megacity to deliver a file that could erase a private army.",
-    year: 2024,
+      "An FBI profiler is forced into an uneasy alliance with an art thief to catch the world's most wanted con artist.",
+    year: 2021,
     maturity: "PG-13",
     runtime: "1h 58m",
-    match: 95,
-    genres: ["Action", "Adventure", "Thriller"],
-    tags: ["Action", "Trending"]
+    match: 90,
+    genres: ["Action", "Comedy", "Crime"],
+    tags: ["Popular", "Only on Netflix", "Movie", "Action"]
   },
   {
-    id: "hollow-harbor",
-    title: "Hollow Harbor",
-    kicker: "N SERIES",
-    description:
-      "A coastal town loses one hour each night, and the few people who remember it keep finding impossible evidence.",
-    year: 2025,
-    maturity: "TV-MA",
-    runtime: "6 Episodes",
-    match: 93,
-    genres: ["Mystery", "Drama", "Horror"],
-    tags: ["Popular"]
-  },
-  {
-    id: "iron-coast",
-    title: "Iron Coast",
-    kicker: "N SERIES",
-    description:
-      "A former shipyard investigator returns to the docks as a weapons ring turns the waterfront into a war zone.",
-    year: 2025,
-    maturity: "TV-MA",
-    runtime: "7 Episodes",
-    match: 97,
-    genres: ["Action", "Crime", "Thriller"],
-    tags: ["Trending", "Action", "Only on Netflix"]
-  },
-  {
-    id: "ghost-district",
-    title: "Ghost District",
+    id: "extraction-2",
+    title: "Extraction 2",
     kicker: "N FILM",
     description:
-      "A developer inherits a condemned block where every apartment records the final minutes of its last resident.",
-    year: 2025,
+      "Tyler Rake returns for another impossible mission, this time pulling a family out of a heavily fortified prison system.",
+    year: 2023,
     maturity: "R",
-    runtime: "1h 49m",
-    match: 95,
-    genres: ["Horror", "Mystery", "Thriller"],
-    tags: ["Trending"]
-  },
-  {
-    id: "midnight-arcade",
-    title: "Midnight Arcade",
-    kicker: "N SERIES",
-    description:
-      "A repair crew discovers an arcade that keeps turning random visitors into accidental heroes.",
-    year: 2025,
-    maturity: "TV-14",
-    runtime: "9 Episodes",
-    match: 93,
-    genres: ["Comedy", "Adventure", "Sci-Fi"],
-    tags: ["Popular", "New"]
-  },
-  {
-    id: "last-signal",
-    title: "Last Signal",
-    kicker: "N SERIES",
-    description:
-      "A satellite operator follows a repeating distress call that seems to come from tomorrow, not deep space.",
-    year: 2026,
-    maturity: "TV-MA",
-    runtime: "8 Episodes",
-    match: 97,
-    genres: ["Sci-Fi", "Mystery", "Action"],
-    tags: ["New", "Trending", "Only on Netflix"]
-  },
-  {
-    id: "afterglow-run",
-    title: "Afterglow Run",
-    kicker: "N FILM",
-    description:
-      "A getaway driver and a whistleblower race through the city after a contract job becomes a full manhunt.",
-    year: 2026,
-    maturity: "R",
-    runtime: "1h 52m",
-    match: 96,
-    genres: ["Crime", "Action", "Thriller"],
-    tags: ["Action", "New", "Trending"]
-  },
-  {
-    id: "blue-harbor",
-    title: "Blue Harbor",
-    kicker: "N FILM",
-    description:
-      "A retired sailor returns home to rebuild the harbor diner that once held his entire family together.",
-    year: 2024,
-    maturity: "PG-13",
     runtime: "2h 03m",
     match: 90,
-    genres: ["Drama", "Family", "Romance"],
-    tags: ["Popular"]
+    genres: ["Action", "Thriller"],
+    tags: ["Popular", "Only on Netflix", "Movie", "Action"]
   },
   {
-    id: "tiny-titans-club",
-    title: "Tiny Titans Club",
+    id: "glass-onion",
+    title: "Glass Onion: A Knives Out Mystery",
     kicker: "N FILM",
     description:
-      "A group of kids and one nervous robot build a neighborhood rescue squad before the summer fair opens.",
-    year: 2024,
-    maturity: "G",
-    runtime: "1h 37m",
+      "Detective Benoit Blanc travels to a private island retreat where a murder game turns into the real thing.",
+    year: 2022,
+    maturity: "PG-13",
+    runtime: "2h 19m",
+    match: 92,
+    genres: ["Mystery", "Comedy", "Crime"],
+    tags: ["Popular", "Only on Netflix", "Movie"]
+  },
+  {
+    id: "the-gray-man",
+    title: "The Gray Man",
+    kicker: "N FILM",
+    description:
+      "A CIA operative uncovers agency secrets and becomes the top target of a relentless former colleague.",
+    year: 2022,
+    maturity: "PG-13",
+    runtime: "2h 09m",
+    match: 91,
+    genres: ["Action", "Thriller"],
+    tags: ["Popular", "Only on Netflix", "Movie", "Action"]
+  },
+  {
+    id: "leave-the-world-behind",
+    title: "Leave the World Behind",
+    kicker: "N FILM",
+    description:
+      "A family getaway unravels as a mysterious blackout spreads and trust collapses between strangers sharing one house.",
+    year: 2023,
+    maturity: "R",
+    runtime: "2h 21m",
+    match: 94,
+    genres: ["Thriller", "Drama", "Mystery"],
+    tags: ["Trending", "Only on Netflix", "Movie"]
+  },
+  {
+    id: "bird-box",
+    title: "Bird Box",
+    kicker: "N FILM",
+    description:
+      "A mother and two children attempt a blindfolded journey through a world where seeing means certain death.",
+    year: 2018,
+    maturity: "R",
+    runtime: "2h 04m",
     match: 90,
-    genres: ["Family", "Animation", "Adventure"],
-    tags: ["Popular", "New"]
+    genres: ["Horror", "Thriller", "Drama"],
+    tags: ["Popular", "Only on Netflix", "Movie"]
+  },
+  {
+    id: "damsel",
+    title: "Damsel",
+    kicker: "N FILM",
+    description:
+      "A dutiful princess discovers her royal marriage was a trap and must battle a dragon to survive.",
+    year: 2024,
+    maturity: "PG-13",
+    runtime: "1h 50m",
+    match: 93,
+    genres: ["Fantasy", "Action", "Adventure"],
+    tags: ["New", "Trending", "Only on Netflix", "Movie", "Action"]
+  },
+  {
+    id: "rebel-moon-part-one",
+    title: "Rebel Moon - Part One: A Child of Fire",
+    kicker: "N FILM",
+    description:
+      "A mysterious outsider recruits unlikely fighters to defend a peaceful colony from an empire's brutal campaign.",
+    year: 2023,
+    maturity: "PG-13",
+    runtime: "2h 14m",
+    match: 92,
+    genres: ["Sci-Fi", "Action", "Adventure"],
+    tags: ["Trending", "Only on Netflix", "Movie", "Action"]
   }
 ];
 
@@ -167,15 +245,19 @@ titles.forEach(title => {
 
 const rowConfig = [
   {
-    title: "Trending Now",
-    filter: item => item.tags.includes("Trending")
+    title: "Top 10 TV Shows",
+    filter: item => item.tags.includes("TV") && item.tags.includes("Trending")
+  },
+  {
+    title: "Top 10 Movies",
+    filter: item => item.tags.includes("Movie") && item.tags.includes("Trending")
   },
   {
     title: "Popular on Netflix",
     filter: item => item.tags.includes("Popular")
   },
   {
-    title: "New Releases",
+    title: "New on Netflix",
     filter: item => item.tags.includes("New")
   },
   {
@@ -184,14 +266,25 @@ const rowConfig = [
   },
   {
     title: "Action Movies",
-    filter: item => item.genres.includes("Action")
+    filter: item => item.tags.includes("Movie") && item.genres.includes("Action")
+  },
+  {
+    title: "TV Dramas",
+    filter: item => item.tags.includes("TV") && item.genres.includes("Drama")
   },
   {
     title: "Sci-Fi and Mystery",
-    filter: item => item.genres.includes("Sci-Fi") || item.genres.includes("Mystery")
+    filter:
+      item =>
+        (item.tags.includes("TV") || item.tags.includes("Movie")) &&
+        (item.genres.includes("Sci-Fi") || item.genres.includes("Mystery"))
   },
   {
     title: "Because you watched thrillers",
+    filter: item => item.genres.includes("Thriller")
+  },
+  {
+    title: "Thrillers",
     filter: item => item.genres.includes("Thriller")
   }
 ];
