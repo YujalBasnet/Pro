@@ -1,245 +1,332 @@
 document.title = "Netflix Clone";
 
-const titles = [
-  {
-    id: "stranger-things",
-    title: "Stranger Things",
-    kicker: "N SERIES",
-    description:
-      "In Hawkins, a missing boy, a secret lab, and a girl with impossible powers pull a small town into a deadly parallel world.",
-    year: 2016,
-    maturity: "TV-14",
-    runtime: "4 Seasons",
-    match: 98,
-    genres: ["Sci-Fi", "Horror", "Drama"],
-    tags: ["Trending", "Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "wednesday",
-    title: "Wednesday",
-    kicker: "N SERIES",
-    description:
-      "At Nevermore Academy, Wednesday Addams investigates a supernatural murder spree while surviving teenage chaos her own way.",
-    year: 2022,
-    maturity: "TV-14",
-    runtime: "2 Seasons",
-    match: 96,
-    genres: ["Mystery", "Fantasy", "Comedy"],
-    tags: ["Trending", "Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "squid-game",
-    title: "Squid Game",
-    kicker: "N SERIES",
-    description:
-      "Hundreds of desperate players compete in deadly childhood games where the winner takes everything and losers leave for good.",
-    year: 2021,
-    maturity: "TV-MA",
-    runtime: "2 Seasons",
-    match: 94,
-    genres: ["Thriller", "Drama", "Mystery"],
-    tags: ["Trending", "Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "money-heist",
-    title: "Money Heist",
-    kicker: "N SERIES",
-    description:
-      "A mastermind known as The Professor recruits specialists for a heist that grows into a global resistance symbol.",
-    year: 2017,
-    maturity: "TV-MA",
-    runtime: "5 Parts",
-    match: 95,
-    genres: ["Crime", "Thriller", "Drama"],
-    tags: ["Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "bridgerton",
-    title: "Bridgerton",
-    kicker: "N SERIES",
-    description:
-      "Ambition, romance, and reputation collide in Regency London as the ton follows every whispered scandal.",
-    year: 2020,
-    maturity: "TV-MA",
-    runtime: "3 Seasons",
-    match: 93,
-    genres: ["Drama", "Romance"],
-    tags: ["Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "the-crown",
-    title: "The Crown",
-    kicker: "N SERIES",
-    description:
-      "The reign of Queen Elizabeth II unfolds through political conflict, private heartbreak, and public duty.",
-    year: 2016,
-    maturity: "TV-MA",
-    runtime: "6 Seasons",
-    match: 97,
-    genres: ["Drama", "History"],
-    tags: ["Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "black-mirror",
-    title: "Black Mirror",
-    kicker: "N SERIES",
-    description:
-      "A sharp anthology where modern technology bends human behavior into dark and often unsettling consequences.",
-    year: 2011,
-    maturity: "TV-MA",
-    runtime: "6 Seasons",
-    match: 95,
-    genres: ["Sci-Fi", "Thriller", "Drama"],
-    tags: ["Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "the-queens-gambit",
-    title: "The Queen's Gambit",
-    kicker: "N SERIES",
-    description:
-      "A chess prodigy fights addiction, pressure, and the elite of the chess world while redefining the game.",
-    year: 2020,
-    maturity: "TV-MA",
-    runtime: "Limited Series",
-    match: 93,
-    genres: ["Drama"],
-    tags: ["Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "ozark",
-    title: "Ozark",
-    kicker: "N SERIES",
-    description:
-      "A financial adviser moves his family to the Ozarks to launder money and quickly discovers survival has new rules.",
-    year: 2017,
-    maturity: "TV-MA",
-    runtime: "4 Seasons",
-    match: 97,
-    genres: ["Crime", "Thriller", "Drama"],
-    tags: ["Popular", "Only on Netflix", "TV"]
-  },
-  {
-    id: "three-body-problem",
-    title: "3 Body Problem",
-    kicker: "N SERIES",
-    description:
-      "Scientists around the world face a coordinated collapse of known physics as a cosmic countdown begins.",
-    year: 2024,
-    maturity: "TV-MA",
-    runtime: "Season 1",
-    match: 96,
-    genres: ["Sci-Fi", "Mystery", "Drama"],
-    tags: ["New", "Trending", "Only on Netflix", "TV"]
-  },
-  {
-    id: "red-notice",
-    title: "Red Notice",
-    kicker: "N FILM",
-    description:
-      "An FBI profiler is forced into an uneasy alliance with an art thief to catch the world's most wanted con artist.",
-    year: 2021,
-    maturity: "PG-13",
-    runtime: "1h 58m",
-    match: 90,
-    genres: ["Action", "Comedy", "Crime"],
-    tags: ["Popular", "Only on Netflix", "Movie", "Action"]
-  },
-  {
-    id: "extraction-2",
-    title: "Extraction 2",
-    kicker: "N FILM",
-    description:
-      "Tyler Rake returns for another impossible mission, this time pulling a family out of a heavily fortified prison system.",
-    year: 2023,
-    maturity: "R",
-    runtime: "2h 03m",
-    match: 90,
-    genres: ["Action", "Thriller"],
-    tags: ["Popular", "Only on Netflix", "Movie", "Action"]
-  },
-  {
-    id: "glass-onion",
-    title: "Glass Onion: A Knives Out Mystery",
-    kicker: "N FILM",
-    description:
-      "Detective Benoit Blanc travels to a private island retreat where a murder game turns into the real thing.",
-    year: 2022,
-    maturity: "PG-13",
-    runtime: "2h 19m",
-    match: 92,
-    genres: ["Mystery", "Comedy", "Crime"],
-    tags: ["Popular", "Only on Netflix", "Movie"]
-  },
-  {
-    id: "the-gray-man",
-    title: "The Gray Man",
-    kicker: "N FILM",
-    description:
-      "A CIA operative uncovers agency secrets and becomes the top target of a relentless former colleague.",
-    year: 2022,
-    maturity: "PG-13",
-    runtime: "2h 09m",
-    match: 91,
-    genres: ["Action", "Thriller"],
-    tags: ["Popular", "Only on Netflix", "Movie", "Action"]
-  },
-  {
-    id: "leave-the-world-behind",
-    title: "Leave the World Behind",
-    kicker: "N FILM",
-    description:
-      "A family getaway unravels as a mysterious blackout spreads and trust collapses between strangers sharing one house.",
-    year: 2023,
-    maturity: "R",
-    runtime: "2h 21m",
-    match: 94,
-    genres: ["Thriller", "Drama", "Mystery"],
-    tags: ["Trending", "Only on Netflix", "Movie"]
-  },
-  {
-    id: "bird-box",
-    title: "Bird Box",
-    kicker: "N FILM",
-    description:
-      "A mother and two children attempt a blindfolded journey through a world where seeing means certain death.",
-    year: 2018,
-    maturity: "R",
-    runtime: "2h 04m",
-    match: 90,
-    genres: ["Horror", "Thriller", "Drama"],
-    tags: ["Popular", "Only on Netflix", "Movie"]
-  },
-  {
-    id: "damsel",
-    title: "Damsel",
-    kicker: "N FILM",
-    description:
-      "A dutiful princess discovers her royal marriage was a trap and must battle a dragon to survive.",
-    year: 2024,
-    maturity: "PG-13",
-    runtime: "1h 50m",
-    match: 93,
-    genres: ["Fantasy", "Action", "Adventure"],
-    tags: ["New", "Trending", "Only on Netflix", "Movie", "Action"]
-  },
-  {
-    id: "rebel-moon-part-one",
-    title: "Rebel Moon - Part One: A Child of Fire",
-    kicker: "N FILM",
-    description:
-      "A mysterious outsider recruits unlikely fighters to defend a peaceful colony from an empire's brutal campaign.",
-    year: 2023,
-    maturity: "PG-13",
-    runtime: "2h 14m",
-    match: 92,
-    genres: ["Sci-Fi", "Action", "Adventure"],
-    tags: ["Trending", "Only on Netflix", "Movie", "Action"]
-  }
+const TOTAL_TITLES = 300;
+
+const titleAdjectives = [
+  "Midnight",
+  "Silent",
+  "Crimson",
+  "Hidden",
+  "Last",
+  "Lost",
+  "Neon",
+  "Golden",
+  "Wild",
+  "Cold",
+  "Dark",
+  "Brave",
+  "Eternal",
+  "Fallen",
+  "Iron",
+  "Velvet",
+  "Radiant",
+  "Rogue",
+  "Storm",
+  "Broken",
+  "Shadow",
+  "Future",
+  "Ancient",
+  "Sacred",
+  "Untamed",
+  "Electric",
+  "Lunar",
+  "Solar",
+  "Obsidian",
+  "Emerald"
 ];
 
+const titleNouns = [
+  "City",
+  "Empire",
+  "Voyage",
+  "Signal",
+  "Crown",
+  "Forest",
+  "Wave",
+  "Frontier",
+  "Legend",
+  "Crew",
+  "Protocol",
+  "Archive",
+  "River",
+  "Blade",
+  "Circle",
+  "Rift",
+  "Heist",
+  "Rescue",
+  "Mystery",
+  "Road",
+  "Sky",
+  "Harbor",
+  "Range",
+  "Unit",
+  "Code",
+  "Circuit",
+  "Valley",
+  "Tide",
+  "Maze",
+  "House"
+];
+
+const titleSuffixes = [
+  "Chronicles",
+  "Files",
+  "Legacy",
+  "Rising",
+  "Reckoning",
+  "Division",
+  "Awakening",
+  "Aftermath",
+  "Genesis",
+  "Zero",
+  "Part II",
+  "Protocol"
+];
+
+const descriptionStarts = [
+  "A reluctant hero",
+  "Two rivals",
+  "A brilliant detective",
+  "A former agent",
+  "A small-town nurse",
+  "A group of friends",
+  "An exiled captain",
+  "A street racer",
+  "A scientist",
+  "A musician",
+  "An outsider",
+  "A seasoned pilot"
+];
+
+const descriptionMiddles = [
+  "uncovers a conspiracy",
+  "is pulled into a covert mission",
+  "must protect a secret",
+  "chases a ghost from the past",
+  "faces an impossible deadline",
+  "discovers a hidden world",
+  "navigates a fragile alliance",
+  "fights to clear a name",
+  "crosses a dangerous border",
+  "is forced to trust a rival"
+];
+
+const descriptionEnds = [
+  "before everything collapses.",
+  "while the city watches.",
+  "as the stakes rise.",
+  "and nothing is what it seems.",
+  "with the clock ticking.",
+  "in a fight for survival.",
+  "when the truth finally lands.",
+  "as the world shifts again.",
+  "under the pressure of fame.",
+  "with nowhere left to hide."
+];
+
+const tvGenres = [
+  "Drama",
+  "Mystery",
+  "Sci-Fi",
+  "Thriller",
+  "Crime",
+  "Comedy",
+  "Fantasy",
+  "History",
+  "Romance",
+  "Horror"
+];
+
+const movieGenres = [
+  "Action",
+  "Adventure",
+  "Thriller",
+  "Drama",
+  "Mystery",
+  "Comedy",
+  "Sci-Fi",
+  "Fantasy",
+  "Crime",
+  "Horror"
+];
+
+function mulberry32(seed) {
+  return () => {
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function hashString(value) {
+  let hash = 2166136261;
+  for (let i = 0; i < value.length; i += 1) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function pick(list, rand) {
+  return list[Math.floor(rand() * list.length)];
+}
+
+function pickUnique(list, count, rand) {
+  const copy = [...list];
+  const result = [];
+  while (result.length < count && copy.length) {
+    const index = Math.floor(rand() * copy.length);
+    result.push(copy.splice(index, 1)[0]);
+  }
+  return result;
+}
+
+function escapeXml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function makeSvgDataUri(options) {
+  const {
+    width,
+    height,
+    title,
+    kicker,
+    subtitle,
+    hue,
+    hue2,
+    accent,
+    titleScale = 0.18,
+    kickerScale = 0.06,
+    subtitleScale = 0.07
+  } = options;
+
+  const titleSize = Math.round(height * titleScale);
+  const kickerSize = Math.round(height * kickerScale);
+  const subtitleSize = Math.round(height * subtitleScale);
+  const safeTitle = escapeXml(title);
+  const safeKicker = escapeXml(kicker);
+  const safeSubtitle = escapeXml(subtitle);
+
+  const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(${hue}, 70%, 18%)" />
+      <stop offset="100%" stop-color="hsl(${hue2}, 68%, 28%)" />
+    </linearGradient>
+    <linearGradient id="glow" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="hsla(${accent}, 75%, 55%, 0.75)" />
+      <stop offset="100%" stop-color="hsla(${accent}, 80%, 35%, 0)" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)" />
+  <rect width="100%" height="100%" fill="url(#glow)" opacity="0.45" />
+  <rect width="100%" height="100%" fill="rgba(0,0,0,0.26)" />
+  <text x="6%" y="20%" fill="rgba(255,255,255,0.75)" font-family="Arial, sans-serif" font-size="${kickerSize}" letter-spacing="2">${safeKicker}</text>
+  <text x="6%" y="52%" fill="#ffffff" font-family="Arial, sans-serif" font-size="${titleSize}" font-weight="700">${safeTitle}</text>
+  <text x="6%" y="72%" fill="rgba(255,255,255,0.78)" font-family="Arial, sans-serif" font-size="${subtitleSize}">${safeSubtitle}</text>
+</svg>
+  `;
+
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function makeTitle(index) {
+  const rand = mulberry32(index + 1);
+  const isSeries = rand() > 0.45;
+  const adjective = pick(titleAdjectives, rand);
+  const noun = pick(titleNouns, rand);
+  const suffix = rand() > 0.7 ? pick(titleSuffixes, rand) : "";
+  const withArticle = rand() > 0.6 ? "The " : "";
+  const title = `${withArticle}${adjective} ${noun}${suffix ? ` ${suffix}` : ""}`;
+  const year = 1998 + Math.floor(rand() * 29);
+  const match = 82 + Math.floor(rand() * 18);
+  const maturity = isSeries
+    ? pick(["TV-MA", "TV-14", "TV-PG"], rand)
+    : pick(["PG-13", "R", "PG"], rand);
+  const runtime = isSeries
+    ? (() => {
+        if (rand() > 0.88) {
+          return "Limited Series";
+        }
+        const seasons = 1 + Math.floor(rand() * 6);
+        return seasons === 1 ? "Season 1" : `${seasons} Seasons`;
+      })()
+    : (() => {
+        const hours = 1 + Math.floor(rand() * 2);
+        const minutes = 20 + Math.floor(rand() * 40);
+        return `${hours}h ${String(minutes).padStart(2, "0")}m`;
+      })();
+  const genres = pickUnique(isSeries ? tvGenres : movieGenres, rand() > 0.66 ? 3 : 2, rand);
+  const tags = ["Only on Netflix", isSeries ? "TV" : "Movie"];
+  if (index % 4 === 0) {
+    tags.push("Trending");
+  }
+  if (index % 3 === 0) {
+    tags.push("Popular");
+  }
+  if (index % 7 === 0 || year >= 2024) {
+    tags.push("New");
+  }
+
+  return {
+    id: `title-${String(index + 1).padStart(3, "0")}`,
+    title,
+    kicker: isSeries ? "N SERIES" : "N FILM",
+    description: `${pick(descriptionStarts, rand)} ${pick(descriptionMiddles, rand)} ${pick(descriptionEnds, rand)}`,
+    year,
+    maturity,
+    runtime,
+    match,
+    genres,
+    tags
+  };
+}
+
+const titles = Array.from({ length: TOTAL_TITLES }, (_, index) => makeTitle(index));
+
 titles.forEach(title => {
-  title.backdrop = `https://picsum.photos/seed/${title.id}-backdrop/1920/1080`;
-  title.thumbnail = `https://picsum.photos/seed/${title.id}-thumbnail/640/360`;
+  const seed = hashString(title.id);
+  const rand = mulberry32(seed);
+  const hue = Math.floor(rand() * 360);
+  const hue2 = (hue + 30 + Math.floor(rand() * 60)) % 360;
+  const accent = (hue + 170) % 360;
+  const subtitle = `${title.genres[0]} / ${title.genres[1] ?? title.genres[0]}`;
+
+  title.backdrop = makeSvgDataUri({
+    width: 1920,
+    height: 1080,
+    title: title.title,
+    kicker: title.kicker,
+    subtitle: `${subtitle} / ${title.runtime}`,
+    hue,
+    hue2,
+    accent,
+    titleScale: 0.12,
+    kickerScale: 0.045,
+    subtitleScale: 0.06
+  });
+
+  title.thumbnail = makeSvgDataUri({
+    width: 640,
+    height: 360,
+    title: title.title,
+    kicker: title.kicker,
+    subtitle,
+    hue,
+    hue2,
+    accent,
+    titleScale: 0.18,
+    kickerScale: 0.06,
+    subtitleScale: 0.07
+  });
+
   title.trailerQuery = `${title.title} official trailer`;
 });
 
