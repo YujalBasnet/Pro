@@ -43,34 +43,23 @@ python app.py export --out data/sessions.csv
 
 # Todo List
 
-A clean, local-first todo list with priorities, due dates, and CSV export.
+A clean, local-first todo list with a desktop UI, priorities, due dates, and CSV export.
 
 ## Quick start
 
 ```bash
-python todo.py init
-python todo.py add "Buy milk" --priority 2 --due "2026-05-10 09:00"
-python todo.py list
-python todo.py done 1
-python todo.py stats
-python todo.py export --out data/todos.csv
+python todo.py
 ```
 
-## Commands
+## UI features
 
-- `init` create the database
-- `add <title> [--notes] [--priority] [--due]` add a todo
-- `list [--status] [--search] [--overdue] [--due-before] [--due-after] [--limit] [--all]` list todos
-- `show <id>` show one todo
-- `done <id>` mark a todo done
-- `reopen <id>` reopen a todo
-- `edit <id> [--title] [--notes] [--priority] [--due] [--clear-due]` edit a todo
-- `delete <id>` delete a todo
-- `clear [--all]` clear completed todos
-- `export [--out] [--status]` export to CSV
-- `stats` show summary counts
+- Add or update todos with title, notes, priority, and due date.
+- Filter by status, search, overdue, or due date range.
+- Mark done, reopen, delete, clear completed, and export to CSV.
+- Live stats bar for open, done, overdue, and due today.
 
 ## Notes
 
 - Data is stored at `data/todo.db` in this project.
 - Due date format: `YYYY-MM-DD` or `YYYY-MM-DD HH:MM`.
+- The database is created automatically on first run.
