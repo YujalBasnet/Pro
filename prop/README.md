@@ -1,0 +1,76 @@
+# FocusFlow
+
+A tiny, local-first focus tracker for tasks and work sessions. It stores data in a lightweight SQLite database under the project folder.
+
+## Quick start
+
+```bash
+python app.py init
+python app.py task add "Write report" --tags "work,writing"
+python app.py task list
+python app.py start --task 1 --note "outline"
+python app.py status
+python app.py stop
+python app.py task done 1
+python app.py resume --note "follow-up"
+python app.py sessions --limit 10
+python app.py stats --days 7 --daily
+python app.py export --out data/sessions.csv
+```
+
+## Commands
+
+- `init` create the database
+- `task add <name> [--tags]` add a task
+- `task list [--status all|open|done] [--search]` list tasks
+- `task edit <id> [--name] [--tags]` update a task
+- `task done <id>` mark a task done
+- `task reopen <id>` reopen a task
+- `start [--task] [--note]` start a session
+- `resume [--note]` start a session for the most recent task
+- `stop` stop the active session
+- `status` show the active session
+- `sessions [--limit] [--task] [--days]` list recent sessions
+- `export [--out] [--task] [--days]` export sessions to CSV
+- `stats [--days] [--task] [--daily]` show basic stats
+
+## Notes
+
+- Data is stored at `data/focusflow.db` in this project.
+- This uses only Python standard library modules.
+
+---
+
+# Todo List
+
+A clean, local-first todo list with priorities, due dates, and CSV export.
+
+## Quick start
+
+```bash
+python todo.py init
+python todo.py add "Buy milk" --priority 2 --due "2026-05-10 09:00"
+python todo.py list
+python todo.py done 1
+python todo.py stats
+python todo.py export --out data/todos.csv
+```
+
+## Commands
+
+- `init` create the database
+- `add <title> [--notes] [--priority] [--due]` add a todo
+- `list [--status] [--search] [--overdue] [--due-before] [--due-after] [--limit] [--all]` list todos
+- `show <id>` show one todo
+- `done <id>` mark a todo done
+- `reopen <id>` reopen a todo
+- `edit <id> [--title] [--notes] [--priority] [--due] [--clear-due]` edit a todo
+- `delete <id>` delete a todo
+- `clear [--all]` clear completed todos
+- `export [--out] [--status]` export to CSV
+- `stats` show summary counts
+
+## Notes
+
+- Data is stored at `data/todo.db` in this project.
+- Due date format: `YYYY-MM-DD` or `YYYY-MM-DD HH:MM`.
