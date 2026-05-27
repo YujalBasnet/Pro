@@ -44,6 +44,17 @@ public class InputReader {
         }
     }
 
+    public int readInt(String prompt) {
+        while (true) {
+            String raw = readRequired(prompt);
+            try {
+                return Integer.parseInt(raw);
+            } catch (NumberFormatException ex) {
+                System.out.println("Enter a valid number.");
+            }
+        }
+    }
+
     public LocalDate readDateOptional(String prompt) {
         while (true) {
             String raw = readOptional(prompt + " (yyyy-MM-dd, blank to skip): ");
