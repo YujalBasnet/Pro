@@ -25,6 +25,10 @@ public final class Validators {
         return trimmed.isEmpty() ? null : trimmed;
     }
 
+    public static String normalizeCourseCode(String code) {
+        return code == null ? null : code.trim().toUpperCase();
+    }
+
     public static void validateEmail(String email) {
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("Email is required.");
@@ -43,6 +47,21 @@ public final class Validators {
         String digits = phone.replaceAll("[^0-9]", "");
         if (digits.length() < 7 || digits.length() > 15) {
             throw new IllegalArgumentException("Phone must have 7 to 15 digits.");
+        }
+    }
+
+    public static void validateCourseCode(String code) {
+        if (code == null || code.isBlank()) {
+            throw new IllegalArgumentException("Course code is required.");
+        }
+        if (!code.matches("[A-Z0-9-]{2,12}")) {
+            throw new IllegalArgumentException("Course code must be 2-12 chars (A-Z, 0-9, -).");
+        }
+    }
+
+    public static void validateCredits(int credits) {
+        if (credits < 1 || credits > 10) {
+            throw new IllegalArgumentException("Credits must be between 1 and 10.");
         }
     }
 
